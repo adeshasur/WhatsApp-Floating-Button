@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       WhatsApp Floating Button
- * Plugin URI:        https://github.com/your-username/whatsapp-floating-button
+ * Plugin URI:        https://github.com/adeshasur/WhatsApp-Floating-Button
  * Description:       Adds a floating WhatsApp contact button to the bottom-right corner of every page on your website. Configure your number from Settings → WhatsApp Button.
  * Version:           1.0.0
  * Requires at least: 5.6
