@@ -1,0 +1,138 @@
+/* =====================================================
+   WhatsApp Floating Button – Frontend Styles
+   Plugin: WhatsApp Floating Button v1.0.0
+   ===================================================== */
+
+/* --- Base button ------------------------------------ */
+.wafb-floating-btn {
+    position: fixed;
+    bottom: 24px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    background-color: #25D366;
+    color: #ffffff;
+    text-decoration: none;
+
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.50);
+
+    /* Smooth entrance */
+    animation: wafb-pop-in 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+
+    /* Smooth transitions for hover/active states */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* --- Position modifiers ----------------------------- */
+.wafb-floating-btn.wafb--right { right: 24px; }
+.wafb-floating-btn.wafb--left  { left: 24px;  }
+
+/* --- Hover state ------------------------------------ */
+.wafb-floating-btn:hover {
+    background-color: #1ebe5d;
+    transform: scale(1.12) translateY(-3px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.60);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* --- Active / click state --------------------------- */
+.wafb-floating-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.40);
+}
+
+/* --- Pulsing ring (attention effect) ---------------- */
+.wafb-floating-btn::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 3px solid rgba(37, 211, 102, 0.55);
+    animation: wafb-pulse 2.4s ease-out infinite;
+    pointer-events: none;
+}
+
+/* --- Tooltip ---------------------------------------- */
+.wafb-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    white-space: nowrap;
+
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 7px 12px;
+    border-radius: 6px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+
+    /* Small arrow pointing down */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Arrow */
+.wafb-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #1a1a1a;
+}
+
+/* Show tooltip on hover */
+.wafb-floating-btn:hover .wafb-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Position tooltip correctly for left-anchored button */
+.wafb-floating-btn.wafb--right .wafb-tooltip { right: 0; }
+.wafb-floating-btn.wafb--left  .wafb-tooltip { left: 0;  }
+
+/* --- SVG icon --------------------------------------- */
+.wafb-floating-btn svg {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+/* --- Hide on mobile option -------------------------- */
+@media (max-width: 767px) {
+    .wafb-floating-btn.wafb--hide-mobile {
+        display: none !important;
+    }
+}
+
+/* --- Keyframes -------------------------------------- */
+
+/* Pop-in entrance animation */
+@keyframes wafb-pop-in {
+    0%   { opacity: 0; transform: scale(0.5); }
+    70%  { transform: scale(1.08); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Pulsing ring animation */
+@keyframes wafb-pulse {
+    0%   { opacity: 0.8; transform: scale(1); }
+    70%  { opacity: 0;   transform: scale(1.45); }
+    100% { opacity: 0;   transform: scale(1.45); }
+}
