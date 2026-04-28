@@ -12,13 +12,21 @@
     var closeBtn  = document.getElementById('wafb-bubble-close');
 
     // ── Click Tracking ──────────────────────────────────────────────────────
-    if (data.trackingOn && mainBtn) {
+    if (data.trackingOn && mainBtn && data.ajaxUrl) {
         mainBtn.addEventListener('click', function () {
             var fd = new FormData();
             fd.append('action', 'wafb_track_click');
             fd.append('nonce',  data.nonce || '');
-            fetch(data.ajaxUrl, { method: 'POST', body: fd }).catch(function () {
-                // Silently fail – tracking is non-critical.
+
+            fetch(data.ajaxUrl, {
+                method: 'POST',
+                body:   fd
+            }).then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+            }).catch(function (error) {
+                console.warn('WAFB: Click tracking failed.', error);
             });
         });
     }

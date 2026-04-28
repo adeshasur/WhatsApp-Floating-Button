@@ -11,11 +11,19 @@
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       whatsapp-floating-button
+ * Domain Path:       /languages
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+/**
+ * Load plugin textdomain for translations.
+ */
+add_action( 'init', function () {
+    load_plugin_textdomain( 'whatsapp-floating-button', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+} );
 
 // ─────────────────────────────────────────────
 // CONSTANTS
@@ -33,7 +41,7 @@ function wafb_defaults() {
         // General
         'phone_number'      => '',
         'prefilled_message' => '',
-        'tooltip_text'      => 'Chat with us on WhatsApp!',
+        'tooltip_text'      => __( 'Chat with us on WhatsApp!', 'whatsapp-floating-button' ),
         'button_position'   => 'right',
         'show_on_mobile'    => '1',
         // Appearance
@@ -43,8 +51,8 @@ function wafb_defaults() {
         'animation_style'   => 'pulse',
         // Chat Bubble
         'bubble_enable'     => '0',
-        'bubble_name'       => 'Support Team',
-        'bubble_text'       => "Hi there! 👋\nHow can I help you today?",
+        'bubble_name'       => __( 'Support Team', 'whatsapp-floating-button' ),
+        'bubble_text'       => __( "Hi there! 👋\nHow can I help you today?", 'whatsapp-floating-button' ),
         'bubble_delay'      => '3',
         'bubble_avatar'     => '',
         // Visibility
@@ -80,8 +88,8 @@ register_activation_hook( __FILE__, function () {
 // ─────────────────────────────────────────────
 add_action( 'admin_menu', function () {
     add_options_page(
-        'WhatsApp Floating Button Settings',
-        'WhatsApp Button',
+        __( 'WhatsApp Floating Button Settings', 'whatsapp-floating-button' ),
+        __( 'WhatsApp Button', 'whatsapp-floating-button' ),
         'manage_options',
         'wafb-settings',
         'wafb_render_settings_page'
@@ -164,20 +172,20 @@ function wafb_render_settings_page() {
                          box-shadow:0 3px 10px rgba(0,0,0,.2);">
                 <?php echo wafb_svg( '#fff', 22 ); ?>
             </span>
-            WhatsApp Floating Button
-            <span style="font-size:12px;font-weight:400;color:#999;align-self:flex-end;margin-bottom:4px;">v2.0</span>
+            <?php _e( 'WhatsApp Floating Button', 'whatsapp-floating-button' ); ?>
+            <span style="font-size:12px;font-weight:400;color:#999;align-self:flex-end;margin-bottom:4px;">v<?php echo esc_html( WAFB_VERSION ); ?></span>
         </h1>
-        <p style="color:#666;margin-bottom:20px;">Configure your floating WhatsApp button from one place.</p>
+        <p style="color:#666;margin-bottom:20px;"><?php _e( 'Configure your floating WhatsApp button from one place.', 'whatsapp-floating-button' ); ?></p>
 
         <?php settings_errors( 'wafb_messages' ); ?>
 
         <!-- TAB NAV -->
         <nav class="nav-tab-wrapper" id="wafb-tabs-nav" style="margin-bottom:0;">
-            <a href="#tab-general"    class="nav-tab nav-tab-active" data-tab="tab-general">⚙️ &nbsp;General</a>
-            <a href="#tab-appearance" class="nav-tab" data-tab="tab-appearance">🎨 &nbsp;Appearance</a>
-            <a href="#tab-bubble"     class="nav-tab" data-tab="tab-bubble">💬 &nbsp;Chat Bubble</a>
-            <a href="#tab-visibility" class="nav-tab" data-tab="tab-visibility">👁️ &nbsp;Visibility</a>
-            <a href="#tab-analytics"  class="nav-tab" data-tab="tab-analytics">📊 &nbsp;Analytics</a>
+            <a href="#tab-general"    class="nav-tab nav-tab-active" data-tab="tab-general">⚙️ &nbsp;<?php _e( 'General', 'whatsapp-floating-button' ); ?></a>
+            <a href="#tab-appearance" class="nav-tab" data-tab="tab-appearance">🎨 &nbsp;<?php _e( 'Appearance', 'whatsapp-floating-button' ); ?></a>
+            <a href="#tab-bubble"     class="nav-tab" data-tab="tab-bubble">💬 &nbsp;<?php _e( 'Chat Bubble', 'whatsapp-floating-button' ); ?></a>
+            <a href="#tab-visibility" class="nav-tab" data-tab="tab-visibility">👁️ &nbsp;<?php _e( 'Visibility', 'whatsapp-floating-button' ); ?></a>
+            <a href="#tab-analytics"  class="nav-tab" data-tab="tab-analytics">📊 &nbsp;<?php _e( 'Analytics', 'whatsapp-floating-button' ); ?></a>
         </nav>
 
         <form method="post" action="options.php" id="wafb-form"
@@ -188,59 +196,59 @@ function wafb_render_settings_page() {
             <div class="wafb-tab-content" id="tab-general">
                 <table class="form-table" role="presentation">
                     <tr>
-                        <th scope="row"><label for="wafb_phone">WhatsApp Phone Number <span style="color:red;">*</span></label></th>
+                        <th scope="row"><label for="wafb_phone"><?php _e( 'WhatsApp Phone Number', 'whatsapp-floating-button' ); ?> <span style="color:red;">*</span></label></th>
                         <td>
                             <input type="tel" id="wafb_phone"
-                                   name="<?php echo WAFB_OPTION_KEY; ?>[phone_number]"
+                                   name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[phone_number]"
                                    value="<?php echo esc_attr( $s['phone_number'] ); ?>"
                                    class="regular-text" placeholder="+94771234567" />
-                            <p class="description">Include country code. No spaces or dashes. e.g. <code>+94771234567</code></p>
+                            <p class="description"><?php _e( 'Include country code. No spaces or dashes. e.g.', 'whatsapp-floating-button' ); ?> <code>+94771234567</code></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wafb_message">Pre-filled Message</label></th>
+                        <th scope="row"><label for="wafb_message"><?php _e( 'Pre-filled Message', 'whatsapp-floating-button' ); ?></label></th>
                         <td>
                             <textarea id="wafb_message"
-                                      name="<?php echo WAFB_OPTION_KEY; ?>[prefilled_message]"
+                                      name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[prefilled_message]"
                                       rows="3" class="large-text"
-                                      placeholder="Hi! I'm interested in..."><?php echo esc_textarea( $s['prefilled_message'] ); ?></textarea>
-                            <p class="description">Automatically typed into WhatsApp when the user opens the chat. Leave empty to open a blank chat.</p>
+                                      placeholder="<?php esc_attr_e( "Hi! I'm interested in...", 'whatsapp-floating-button' ); ?>"><?php echo esc_textarea( $s['prefilled_message'] ); ?></textarea>
+                            <p class="description"><?php _e( 'Automatically typed into WhatsApp when the user opens the chat. Leave empty to open a blank chat.', 'whatsapp-floating-button' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wafb_tooltip">Hover Tooltip Text</label></th>
+                        <th scope="row"><label for="wafb_tooltip"><?php _e( 'Hover Tooltip Text', 'whatsapp-floating-button' ); ?></label></th>
                         <td>
                             <input type="text" id="wafb_tooltip"
-                                   name="<?php echo WAFB_OPTION_KEY; ?>[tooltip_text]"
+                                   name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[tooltip_text]"
                                    value="<?php echo esc_attr( $s['tooltip_text'] ); ?>"
                                    class="regular-text" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Button Position</th>
+                        <th scope="row"><?php _e( 'Button Position', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <fieldset>
                                 <label style="margin-right:20px;">
-                                    <input type="radio" name="<?php echo WAFB_OPTION_KEY; ?>[button_position]"
+                                    <input type="radio" name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[button_position]"
                                            value="right" <?php checked( $s['button_position'], 'right' ); ?>>
-                                    Bottom Right
+                                    <?php _e( 'Bottom Right', 'whatsapp-floating-button' ); ?>
                                 </label>
                                 <label>
-                                    <input type="radio" name="<?php echo WAFB_OPTION_KEY; ?>[button_position]"
+                                    <input type="radio" name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[button_position]"
                                            value="left" <?php checked( $s['button_position'], 'left' ); ?>>
-                                    Bottom Left
+                                    <?php _e( 'Bottom Left', 'whatsapp-floating-button' ); ?>
                                 </label>
                             </fieldset>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Show on Mobile</th>
+                        <th scope="row"><?php _e( 'Show on Mobile', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox"
-                                       name="<?php echo WAFB_OPTION_KEY; ?>[show_on_mobile]"
+                                       name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[show_on_mobile]"
                                        value="1" <?php checked( $s['show_on_mobile'], '1' ); ?>>
-                                Display the button on mobile devices (&lt; 768px)
+                                <?php _e( 'Display the button on mobile devices (< 768px)', 'whatsapp-floating-button' ); ?>
                             </label>
                         </td>
                     </tr>
@@ -251,59 +259,63 @@ function wafb_render_settings_page() {
             <div class="wafb-tab-content" id="tab-appearance" style="display:none;">
                 <table class="form-table" role="presentation">
                     <tr>
-                        <th scope="row"><label for="wafb_color">Button Colour</label></th>
+                        <th scope="row"><label for="wafb_color"><?php _e( 'Button Colour', 'whatsapp-floating-button' ); ?></label></th>
                         <td style="display:flex;align-items:center;gap:12px;padding-top:12px;">
                             <input type="color" id="wafb_color"
-                                   name="<?php echo WAFB_OPTION_KEY; ?>[button_color]"
+                                   name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[button_color]"
                                    value="<?php echo esc_attr( $s['button_color'] ); ?>"
                                    style="width:54px;height:38px;padding:2px;border-radius:6px;cursor:pointer;border:1px solid #ddd;" />
-                            <span style="color:#666;font-size:13px;">Default: <code>#25D366</code> (WhatsApp Green)</span>
+                            <span style="color:#666;font-size:13px;"><?php _e( 'Default:', 'whatsapp-floating-button' ); ?> <code>#25D366</code> (<?php _e( 'WhatsApp Green', 'whatsapp-floating-button' ); ?>)</span>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Button Size</th>
+                        <th scope="row"><?php _e( 'Button Size', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <fieldset>
                                 <?php
-                                $sizes = array( 'small' => 'Small (48 px)', 'medium' => 'Medium (60 px)', 'large' => 'Large (72 px)' );
+                                $sizes = array(
+                                    'small'  => __( 'Small (48 px)', 'whatsapp-floating-button' ),
+                                    'medium' => __( 'Medium (60 px)', 'whatsapp-floating-button' ),
+                                    'large'  => __( 'Large (72 px)', 'whatsapp-floating-button' ),
+                                );
                                 foreach ( $sizes as $val => $lbl ) :
                                 ?>
                                 <label style="margin-right:20px;">
-                                    <input type="radio" name="<?php echo WAFB_OPTION_KEY; ?>[button_size]"
-                                           value="<?php echo $val; ?>" <?php checked( $s['button_size'], $val ); ?>>
-                                    <?php echo $lbl; ?>
+                                    <input type="radio" name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[button_size]"
+                                           value="<?php echo esc_attr( $val ); ?>" <?php checked( $s['button_size'], $val ); ?>>
+                                    <?php echo esc_html( $lbl ); ?>
                                 </label>
                                 <?php endforeach; ?>
                             </fieldset>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wafb_label">Button Label Text</label></th>
+                        <th scope="row"><label for="wafb_label"><?php _e( 'Button Label Text', 'whatsapp-floating-button' ); ?></label></th>
                         <td>
                             <input type="text" id="wafb_label"
-                                   name="<?php echo WAFB_OPTION_KEY; ?>[button_label]"
+                                   name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[button_label]"
                                    value="<?php echo esc_attr( $s['button_label'] ); ?>"
-                                   class="regular-text" placeholder="e.g. Chat with us" />
-                            <p class="description">Optional. The button expands into a pill shape on hover to reveal this text. Leave empty for icon-only.</p>
+                                   class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Chat with us', 'whatsapp-floating-button' ); ?>" />
+                            <p class="description"><?php _e( 'Optional. The button expands into a pill shape on hover to reveal this text. Leave empty for icon-only.', 'whatsapp-floating-button' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Animation Style</th>
+                        <th scope="row"><?php _e( 'Animation Style', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <fieldset>
                                 <?php
                                 $anims = array(
-                                    'pulse'  => '🔴 Pulse Ring',
-                                    'bounce' => '⬆️ Bounce',
-                                    'shake'  => '📳 Shake',
-                                    'none'   => '⏹️ None',
+                                    'pulse'  => __( '🔴 Pulse Ring', 'whatsapp-floating-button' ),
+                                    'bounce' => __( '⬆️ Bounce', 'whatsapp-floating-button' ),
+                                    'shake'  => __( '📳 Shake', 'whatsapp-floating-button' ),
+                                    'none'   => __( '⏹️ None', 'whatsapp-floating-button' ),
                                 );
                                 foreach ( $anims as $val => $lbl ) :
                                 ?>
                                 <label style="margin-right:20px;">
-                                    <input type="radio" name="<?php echo WAFB_OPTION_KEY; ?>[animation_style]"
-                                           value="<?php echo $val; ?>" <?php checked( $s['animation_style'], $val ); ?>>
-                                    <?php echo $lbl; ?>
+                                    <input type="radio" name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[animation_style]"
+                                           value="<?php echo esc_attr( $val ); ?>" <?php checked( $s['animation_style'], $val ); ?>>
+                                    <?php echo esc_html( $lbl ); ?>
                                 </label>
                                 <?php endforeach; ?>
                             </fieldset>
@@ -316,52 +328,52 @@ function wafb_render_settings_page() {
             <div class="wafb-tab-content" id="tab-bubble" style="display:none;">
                 <table class="form-table" role="presentation">
                     <tr>
-                        <th scope="row">Enable Chat Bubble</th>
+                        <th scope="row"><?php _e( 'Enable Chat Bubble', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox" id="wafb_bubble_enable"
-                                       name="<?php echo WAFB_OPTION_KEY; ?>[bubble_enable]"
+                                       name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[bubble_enable]"
                                        value="1" <?php checked( $s['bubble_enable'], '1' ); ?>>
-                                Show a chat popup bubble above the button after a delay
+                                <?php _e( 'Show a chat popup bubble above the button after a delay', 'whatsapp-floating-button' ); ?>
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wafb_bubble_name">Agent / Team Name</label></th>
+                        <th scope="row"><label for="wafb_bubble_name"><?php _e( 'Agent / Team Name', 'whatsapp-floating-button' ); ?></label></th>
                         <td>
                             <input type="text" id="wafb_bubble_name"
-                                   name="<?php echo WAFB_OPTION_KEY; ?>[bubble_name]"
+                                   name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[bubble_name]"
                                    value="<?php echo esc_attr( $s['bubble_name'] ); ?>"
-                                   class="regular-text" placeholder="Support Team" />
+                                   class="regular-text" placeholder="<?php esc_attr_e( 'Support Team', 'whatsapp-floating-button' ); ?>" />
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wafb_bubble_text">Bubble Message</label></th>
+                        <th scope="row"><label for="wafb_bubble_text"><?php _e( 'Bubble Message', 'whatsapp-floating-button' ); ?></label></th>
                         <td>
                             <textarea id="wafb_bubble_text"
-                                      name="<?php echo WAFB_OPTION_KEY; ?>[bubble_text]"
+                                      name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[bubble_text]"
                                       rows="3" class="large-text"><?php echo esc_textarea( $s['bubble_text'] ); ?></textarea>
-                            <p class="description">Supports emojis. Line breaks are preserved.</p>
+                            <p class="description"><?php _e( 'Supports emojis. Line breaks are preserved.', 'whatsapp-floating-button' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wafb_bubble_avatar">Agent Avatar URL</label></th>
+                        <th scope="row"><label for="wafb_bubble_avatar"><?php _e( 'Agent Avatar URL', 'whatsapp-floating-button' ); ?></label></th>
                         <td>
                             <input type="url" id="wafb_bubble_avatar"
-                                   name="<?php echo WAFB_OPTION_KEY; ?>[bubble_avatar]"
-                                   value="<?php echo esc_attr( $s['bubble_avatar'] ); ?>"
+                                   name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[bubble_avatar]"
+                                   value="<?php echo esc_url( $s['bubble_avatar'] ); ?>"
                                    class="large-text" placeholder="https://example.com/avatar.jpg" />
-                            <p class="description">Optional profile photo URL. Leave empty to use the WhatsApp icon.</p>
+                            <p class="description"><?php _e( 'Optional profile photo URL. Leave empty to use the WhatsApp icon.', 'whatsapp-floating-button' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wafb_bubble_delay">Show After</label></th>
+                        <th scope="row"><label for="wafb_bubble_delay"><?php _e( 'Show After', 'whatsapp-floating-button' ); ?></label></th>
                         <td style="display:flex;align-items:center;gap:10px;padding-top:12px;">
                             <input type="number" id="wafb_bubble_delay"
-                                   name="<?php echo WAFB_OPTION_KEY; ?>[bubble_delay]"
+                                   name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[bubble_delay]"
                                    value="<?php echo absint( $s['bubble_delay'] ); ?>"
                                    min="0" max="120" style="width:80px;" />
-                            <span style="color:#555;">seconds after page load</span>
+                            <span style="color:#555;"><?php _e( 'seconds after page load', 'whatsapp-floating-button' ); ?></span>
                         </td>
                     </tr>
                 </table>
@@ -374,7 +386,7 @@ function wafb_render_settings_page() {
                 $preview_avatar = esc_url( $s['bubble_avatar'] );
                 ?>
                 <hr style="margin:20px 0;" />
-                <h3 style="margin-bottom:8px;">Live Preview</h3>
+                <h3 style="margin-bottom:8px;"><?php _e( 'Live Preview', 'whatsapp-floating-button' ); ?></h3>
                 <div style="position:relative;width:320px;margin:0 auto;">
                     <div class="wafb-bubble-preview" style="
                         width:300px;background:#fff;border-radius:16px;
@@ -392,7 +404,7 @@ function wafb_render_settings_page() {
                             </div>
                             <div>
                                 <strong style="display:block;color:#fff;font-size:14px;"><?php echo $preview_name; ?></strong>
-                                <span style="color:rgba(255,255,255,.85);font-size:11px;">● Online</span>
+                                <span style="color:rgba(255,255,255,.85);font-size:11px;">● <?php _e( 'Online', 'whatsapp-floating-button' ); ?></span>
                             </div>
                         </div>
                         <div style="padding:14px;background:#f0f2f5;">
@@ -405,7 +417,7 @@ function wafb_render_settings_page() {
                         <div style="background:<?php echo $preview_color; ?>;padding:12px 16px;
                                     display:flex;align-items:center;justify-content:center;
                                     gap:8px;color:#fff;font-size:13px;font-weight:600;">
-                            <?php echo wafb_svg( '#fff', 16 ); ?> Start Conversation
+                            <?php echo wafb_svg( '#fff', 16 ); ?> <?php _e( 'Start Conversation', 'whatsapp-floating-button' ); ?>
                         </div>
                     </div>
                 </div>
@@ -415,20 +427,20 @@ function wafb_render_settings_page() {
             <div class="wafb-tab-content" id="tab-visibility" style="display:none;">
                 <table class="form-table" role="presentation">
                     <tr>
-                        <th scope="row">Page Visibility</th>
+                        <th scope="row"><?php _e( 'Page Visibility', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <?php
                             $vis_opts = array(
-                                'all'     => 'Show on <strong>all</strong> pages',
-                                'include' => 'Show <strong>only</strong> on selected pages',
-                                'exclude' => '<strong>Hide</strong> on selected pages',
+                                'all'     => __( 'Show on <strong>all</strong> pages', 'whatsapp-floating-button' ),
+                                'include' => __( 'Show <strong>only</strong> on selected pages', 'whatsapp-floating-button' ),
+                                'exclude' => __( '<strong>Hide</strong> on selected pages', 'whatsapp-floating-button' ),
                             );
                             foreach ( $vis_opts as $val => $lbl ) :
                             ?>
                             <label style="display:block;margin-bottom:8px;">
                                 <input type="radio" class="wafb-vis-radio"
-                                       name="<?php echo WAFB_OPTION_KEY; ?>[visibility_type]"
-                                       value="<?php echo $val; ?>"
+                                       name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[visibility_type]"
+                                       value="<?php echo esc_attr( $val ); ?>"
                                        <?php checked( $s['visibility_type'], $val ); ?>>
                                 <?php echo $lbl; ?>
                             </label>
@@ -438,7 +450,7 @@ function wafb_render_settings_page() {
                                  style="<?php echo $s['visibility_type'] === 'all' ? 'display:none;' : ''; ?>
                                         margin-top:12px;padding:14px;
                                         background:#f8f8f8;border:1px solid #ddd;border-radius:6px;max-width:480px;">
-                                <p style="margin:0 0 10px;font-weight:600;font-size:13px;">Select Pages:</p>
+                                <p style="margin:0 0 10px;font-weight:600;font-size:13px;"><?php _e( 'Select Pages:', 'whatsapp-floating-button' ); ?></p>
                                 <div style="max-height:200px;overflow-y:auto;">
                                 <?php
                                 $all_pages = get_pages();
@@ -448,8 +460,8 @@ function wafb_render_settings_page() {
                                 ?>
                                 <label style="display:block;padding:4px 0;font-size:13px;">
                                     <input type="checkbox"
-                                           name="<?php echo WAFB_OPTION_KEY; ?>[visibility_pages][]"
-                                           value="<?php echo $page->ID; ?>" <?php echo $checked; ?>>
+                                           name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[visibility_pages][]"
+                                           value="<?php echo esc_attr( $page->ID ); ?>" <?php echo $checked; ?>>
                                     <?php echo esc_html( $page->post_title ); ?>
                                 </label>
                                 <?php endforeach; ?>
@@ -458,13 +470,13 @@ function wafb_render_settings_page() {
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Business Hours</th>
+                        <th scope="row"><?php _e( 'Business Hours', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <label style="display:block;margin-bottom:14px;">
                                 <input type="checkbox" id="wafb_hours_enable"
-                                       name="<?php echo WAFB_OPTION_KEY; ?>[hours_enable]"
+                                       name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[hours_enable]"
                                        value="1" <?php checked( $s['hours_enable'], '1' ); ?>>
-                                Only show button during business hours
+                                <?php _e( 'Only show button during business hours', 'whatsapp-floating-button' ); ?>
                             </label>
 
                             <div id="wafb-hours-opts"
@@ -473,36 +485,44 @@ function wafb_render_settings_page() {
                                         border:1px solid #ddd;border-radius:6px;max-width:540px;">
                                 <table style="border-spacing:0 10px;">
                                     <tr>
-                                        <td style="padding-right:16px;font-weight:600;font-size:13px;white-space:nowrap;">Active Days</td>
+                                        <td style="padding-right:16px;font-weight:600;font-size:13px;white-space:nowrap;"><?php _e( 'Active Days', 'whatsapp-floating-button' ); ?></td>
                                         <td>
                                             <?php
-                                            $day_names = array( '0'=>'Sun','1'=>'Mon','2'=>'Tue','3'=>'Wed','4'=>'Thu','5'=>'Fri','6'=>'Sat' );
+                                            $day_names = array(
+                                                '0' => __( 'Sun', 'whatsapp-floating-button' ),
+                                                '1' => __( 'Mon', 'whatsapp-floating-button' ),
+                                                '2' => __( 'Tue', 'whatsapp-floating-button' ),
+                                                '3' => __( 'Wed', 'whatsapp-floating-button' ),
+                                                '4' => __( 'Thu', 'whatsapp-floating-button' ),
+                                                '5' => __( 'Fri', 'whatsapp-floating-button' ),
+                                                '6' => __( 'Sat', 'whatsapp-floating-button' ),
+                                            );
                                             foreach ( $day_names as $num => $name ) :
-                                                $chk = in_array( $num, (array) $s['hours_days'], true ) ? 'checked' : '';
+                                                $chk = in_array( (string) $num, (array) $s['hours_days'], true ) ? 'checked' : '';
                                             ?>
                                             <label style="margin-right:12px;font-size:13px;">
                                                 <input type="checkbox"
-                                                       name="<?php echo WAFB_OPTION_KEY; ?>[hours_days][]"
-                                                       value="<?php echo $num; ?>" <?php echo $chk; ?>>
-                                                <?php echo $name; ?>
+                                                       name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[hours_days][]"
+                                                       value="<?php echo esc_attr( $num ); ?>" <?php echo $chk; ?>>
+                                                <?php echo esc_html( $name ); ?>
                                             </label>
                                             <?php endforeach; ?>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding-right:16px;font-weight:600;font-size:13px;">Time Range</td>
+                                        <td style="padding-right:16px;font-weight:600;font-size:13px;"><?php _e( 'Time Range', 'whatsapp-floating-button' ); ?></td>
                                         <td>
-                                            <input type="time" name="<?php echo WAFB_OPTION_KEY; ?>[hours_start]"
+                                            <input type="time" name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[hours_start]"
                                                    value="<?php echo esc_attr( $s['hours_start'] ); ?>" />
                                             &nbsp;—&nbsp;
-                                            <input type="time" name="<?php echo WAFB_OPTION_KEY; ?>[hours_end]"
+                                            <input type="time" name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[hours_end]"
                                                    value="<?php echo esc_attr( $s['hours_end'] ); ?>" />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding-right:16px;font-weight:600;font-size:13px;">Timezone</td>
+                                        <td style="padding-right:16px;font-weight:600;font-size:13px;"><?php _e( 'Timezone', 'whatsapp-floating-button' ); ?></td>
                                         <td>
-                                            <select name="<?php echo WAFB_OPTION_KEY; ?>[hours_timezone]">
+                                            <select name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[hours_timezone]">
                                                 <?php
                                                 foreach ( DateTimeZone::listIdentifiers() as $tz ) :
                                                     $sel = selected( $s['hours_timezone'], $tz, false );
@@ -514,8 +534,11 @@ function wafb_render_settings_page() {
                                     </tr>
                                 </table>
                                 <p style="margin:10px 0 0;font-size:12px;color:#888;">
-                                    Current server time: <strong><?php echo current_time( 'H:i' ); ?></strong>
-                                    (server timezone: <?php echo esc_html( wp_timezone_string() ); ?>)
+                                    <?php printf(
+                                        __( 'Current server time: <strong>%s</strong> (server timezone: %s)', 'whatsapp-floating-button' ),
+                                        current_time( 'H:i' ),
+                                        esc_html( wp_timezone_string() )
+                                    ); ?>
                                 </p>
                             </div>
                         </td>
@@ -527,39 +550,39 @@ function wafb_render_settings_page() {
             <div class="wafb-tab-content" id="tab-analytics" style="display:none;">
                 <table class="form-table" role="presentation">
                     <tr>
-                        <th scope="row">Click Tracking</th>
+                        <th scope="row"><?php _e( 'Click Tracking', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <label>
                                 <input type="checkbox"
-                                       name="<?php echo WAFB_OPTION_KEY; ?>[tracking_enable]"
+                                       name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[tracking_enable]"
                                        value="1" <?php checked( $s['tracking_enable'], '1' ); ?>>
-                                Track every click on the WhatsApp button
+                                <?php _e( 'Track every click on the WhatsApp button', 'whatsapp-floating-button' ); ?>
                             </label>
-                            <p class="description">Clicks are stored in the WordPress database. No external service is used.</p>
+                            <p class="description"><?php _e( 'Clicks are stored in the WordPress database. No external service is used.', 'whatsapp-floating-button' ); ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Total Clicks</th>
+                        <th scope="row"><?php _e( 'Total Clicks', 'whatsapp-floating-button' ); ?></th>
                         <td>
                             <div style="display:inline-flex;align-items:center;gap:20px;
                                         background:#f8f8f8;border:1px solid #ddd;border-radius:10px;
                                         padding:20px 28px;">
                                 <div style="text-align:center;">
                                     <div style="font-size:48px;font-weight:800;color:<?php echo esc_attr( $s['button_color'] ); ?>;line-height:1;">
-                                        <?php echo number_format( $s['click_count'] ); ?>
+                                        <?php echo number_format( absint( $s['click_count'] ) ); ?>
                                     </div>
-                                    <div style="font-size:12px;color:#888;margin-top:4px;">TOTAL CLICKS</div>
+                                    <div style="font-size:12px;color:#888;margin-top:4px;"><?php _e( 'TOTAL CLICKS', 'whatsapp-floating-button' ); ?></div>
                                 </div>
                                 <div style="border-left:1px solid #ddd;height:60px;margin:0 4px;"></div>
                                 <div>
                                     <p style="margin:0 0 8px;color:#555;font-size:13px;">
-                                        Every time a visitor clicks the WhatsApp<br>button, this counter increments by 1.
+                                        <?php _e( 'Every time a visitor clicks the WhatsApp<br>button, this counter increments by 1.', 'whatsapp-floating-button' ); ?>
                                     </p>
                                     <label style="font-size:12px;color:#c00;">
                                         <input type="checkbox"
-                                               name="<?php echo WAFB_OPTION_KEY; ?>[reset_clicks]"
+                                               name="<?php echo esc_attr( WAFB_OPTION_KEY ); ?>[reset_clicks]"
                                                value="1">
-                                        ⚠️ Reset counter to 0 on save
+                                        <?php _e( '⚠️ Reset counter to 0 on save', 'whatsapp-floating-button' ); ?>
                                     </label>
                                 </div>
                             </div>
@@ -568,7 +591,9 @@ function wafb_render_settings_page() {
                 </table>
             </div>
 
-            <?php submit_button( 'Save Settings' ); ?>
+            <div style="margin-top:30px;padding:20px;background:#fff;border:1px solid #ddd;border-radius:6px;display:flex;justify-content:flex-end;">
+                <?php submit_button( __( 'Save All Changes', 'whatsapp-floating-button' ), 'primary large', 'submit', false ); ?>
+            </div>
         </form>
     </div>
 
@@ -759,8 +784,8 @@ function wafb_render_button() {
     <div class="wafb-bubble wafb-bubble--<?php echo esc_attr( $pos ); ?>"
          id="wafb-bubble"
          style="--wafb-color:<?php echo esc_attr( $color ); ?>;"
-         role="dialog" aria-label="WhatsApp Chat" aria-live="polite">
-        <button class="wafb-bubble__close" id="wafb-bubble-close" aria-label="Close chat bubble">&times;</button>
+         role="dialog" aria-label="<?php esc_attr_e( 'WhatsApp Chat', 'whatsapp-floating-button' ); ?>" aria-live="polite">
+        <button class="wafb-bubble__close" id="wafb-bubble-close" aria-label="<?php esc_attr_e( 'Close chat bubble', 'whatsapp-floating-button' ); ?>">&times;</button>
         <div class="wafb-bubble__header">
             <div class="wafb-bubble__avatar">
                 <?php if ( ! empty( $bubble_avatar ) ) : ?>
@@ -770,17 +795,17 @@ function wafb_render_button() {
                 <?php endif; ?>
             </div>
             <div>
-                <strong class="wafb-bubble__name"><?php echo $bubble_name; ?></strong>
-                <span class="wafb-bubble__status">● Online</span>
+                <strong class="wafb-bubble__name"><?php echo esc_html( $bubble_name ); ?></strong>
+                <span class="wafb-bubble__status">● <?php _e( 'Online', 'whatsapp-floating-button' ); ?></span>
             </div>
         </div>
         <div class="wafb-bubble__body">
-            <div class="wafb-bubble__msg"><?php echo $bubble_text; ?></div>
+            <div class="wafb-bubble__msg"><?php echo wp_kses_post( $bubble_text ); ?></div>
         </div>
         <a href="<?php echo esc_url( $url ); ?>"
            class="wafb-bubble__cta"
            target="_blank" rel="noopener noreferrer">
-            <?php echo wafb_svg( '#fff', 16 ); ?> Start Conversation
+            <?php echo wafb_svg( '#fff', 16 ); ?> <?php _e( 'Start Conversation', 'whatsapp-floating-button' ); ?>
         </a>
     </div>
     <?php endif; ?>
