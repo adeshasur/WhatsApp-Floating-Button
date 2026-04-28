@@ -3,7 +3,7 @@
 A professional, high-performance floating WhatsApp button plugin for WordPress. Designed for modern websites that prioritize user experience and premium aesthetics.
 
 <p align="center">
-  <img src="preview/01.PNG" alt="WhatsApp Floating Button Preview" width="600">
+  <img src="preview/01.PNG" alt="WhatsApp Floating Button Preview" width="450">
 </p>
 
 ## Features
