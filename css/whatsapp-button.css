@@ -70,12 +70,15 @@
 
 .wafb-floating-btn svg {
     flex-shrink: 0;
-    transition: transform var(--wafb-transition);
+    transition: margin 0.35s ease, transform var(--wafb-transition);
     display: block;
-    /* Optical centering: the WhatsApp tail is on the bottom-left, 
-       so we nudge the icon slightly to the right/top to look "centered" */
+    /* Optical centering: nudge by default */
     margin-left: 1px;
     margin-top: -1px;
+}
+.wafb-floating-btn.wafb--has-label:hover svg {
+    margin-left: 18px;
+    margin-top: 0;
 }
 
 /* ── Hover ─────────────────────────────────────────── */
@@ -118,9 +121,7 @@
 .wafb-floating-btn.wafb--has-label.wafb--large  { width: auto; min-width: 72px; height: 72px; }
 
 /* Add left padding to icon so it doesn't hug the edge */
-.wafb-floating-btn.wafb--has-label.wafb--small  svg { margin-left: 13px; }
-.wafb-floating-btn.wafb--has-label.wafb--medium svg { margin-left: 16px; }
-.wafb-floating-btn.wafb--has-label.wafb--large  svg { margin-left: 19px; }
+/* Margin is now handled dynamically in the .wafb-floating-btn svg rules above */
 
 /* Expand on hover */
 .wafb-floating-btn.wafb--has-label:hover {
