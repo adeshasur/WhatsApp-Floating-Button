@@ -316,10 +316,25 @@
     line-height: 1.3;
 }
 .wafb-bubble__status {
-    display:    block;
+    display:    flex;
+    align-items: center;
+    gap:        5px;
     color:      rgba(255, 255, 255, 0.85);
     font-size:  11px;
     margin-top: 2px;
+}
+.wafb-status-dot {
+    width:      8px;
+    height:     8px;
+    background: #25D366;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
+    animation:  wafb-status-blink 1.5s infinite ease-in-out;
+}
+@keyframes wafb-status-blink {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
 }
 
 /* ── Message body ──────────────────────────────────── */

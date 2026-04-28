@@ -875,7 +875,7 @@ function wafb_render_button() {
             </div>
             <div>
                 <strong class="wafb-bubble__name"><?php echo esc_html( $bubble_name ); ?></strong>
-                <span class="wafb-bubble__status">● <?php _e( 'Online', 'whatsapp-floating-button' ); ?></span>
+                <span class="wafb-bubble__status"><span class="wafb-status-dot"></span> <?php _e( 'Online', 'whatsapp-floating-button' ); ?></span>
             </div>
         </div>
         <div class="wafb-bubble__body">
