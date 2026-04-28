@@ -32,6 +32,10 @@
     text-decoration:     none;
     overflow:            hidden;
     cursor:              pointer;
+    padding:             0;
+    border:              none;
+    line-height:         0;
+    outline:             none;
 
     box-shadow:          var(--wafb-shadow);
     animation:           wafb-pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
@@ -60,6 +64,11 @@
 .wafb-floating-btn svg {
     flex-shrink: 0;
     transition: transform var(--wafb-transition);
+    display: block;
+    /* Optical centering: the WhatsApp tail is on the bottom-left, 
+       so we nudge the icon slightly to the right/top to look "centered" */
+    margin-left: 1px;
+    margin-top: -1px;
 }
 
 /* ── Hover ─────────────────────────────────────────── */
