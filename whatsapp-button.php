@@ -3,7 +3,7 @@
  * Plugin Name:       WhatsApp Floating Button
  * Plugin URI:        https://github.com/adeshasur/WhatsApp-Floating-Button
  * Description:       Advanced floating WhatsApp button with chat bubble popup, business hours, custom colours, pre-filled messages, click analytics, and page visibility rules.
- * Version:           2.0.0
+ * Version:           2.1.0
  * Requires at least: 5.6
  * Requires PHP:      7.4
  * Author:            Your Name
@@ -223,9 +223,10 @@ function wafb_render_settings_page() {
             <a href="#tab-bubble"     class="nav-tab" data-tab="tab-bubble">💬 &nbsp;<?php _e( 'Chat Bubble', 'whatsapp-floating-button' ); ?></a>
             <a href="#tab-visibility" class="nav-tab" data-tab="tab-visibility">👁️ &nbsp;<?php _e( 'Visibility', 'whatsapp-floating-button' ); ?></a>
             <a href="#tab-analytics"  class="nav-tab" data-tab="tab-analytics">📊 &nbsp;<?php _e( 'Analytics', 'whatsapp-floating-button' ); ?></a>
+            <a href="#tab-support"    class="nav-tab" data-tab="tab-support">❓ &nbsp;<?php _e( 'Support & More', 'whatsapp-floating-button' ); ?></a>
         </nav>
 
-        <form method="post" action="options.php" id="wafb-form"
+        <form method="post" action="options.php" id="wafb-settings-form"
               style="background:#fff;border:1px solid #c3c4c7;border-top:none;border-radius:0 0 6px 6px;padding:20px 24px;">
             <?php settings_fields( 'wafb_group' ); ?>
 
@@ -631,6 +632,30 @@ overflow:hidden;
                         </td>
                     </tr>
                 </table>
+            </div>
+
+            <!-- Support Tab -->
+            <div id="tab-support" class="wafb-tab-content" style="display:none;">
+                <div style="background:#f9f9f9;border:1px solid #ddd;border-radius:10px;padding:30px;text-align:center;max-width:600px;margin:20px auto;">
+                    <div style="font-size:40px;margin-bottom:15px;">❓</div>
+                    <h3 style="font-size:22px;margin:0 0 10px;"><?php _e( 'Need Help?', 'whatsapp-floating-button' ); ?></h3>
+                    <p style="color:#666;font-size:14px;line-height:1.6;margin-bottom:25px;">
+                        <?php _e( 'If you have any issues, feature requests, or need help setting up the plugin, feel free to visit our GitHub repository or check the documentation.', 'whatsapp-floating-button' ); ?>
+                    </p>
+                    <div style="display:flex;justify-content:center;gap:15px;">
+                        <a href="https://github.com/adeshasur/WhatsApp-Floating-Button" target="_blank" class="button button-primary button-large">
+                            <?php _e( 'View on GitHub', 'whatsapp-floating-button' ); ?>
+                        </a>
+                        <a href="https://adeshasur.github.io/WhatsApp-Floating-Button/" target="_blank" class="button button-large">
+                            <?php _e( 'Live Demo & Docs', 'whatsapp-floating-button' ); ?>
+                        </a>
+                    </div>
+                    <hr style="margin:30px 0;border:0;border-top:1px solid #eee;">
+                    <h4 style="margin:0 0 10px;"><?php _e( 'Spread the Love', 'whatsapp-floating-button' ); ?></h4>
+                    <p style="color:#888;font-size:13px;">
+                        <?php _e( 'If you like this plugin, please consider giving it a star on GitHub. It helps us grow and keep building more cool features!', 'whatsapp-floating-button' ); ?>
+                    </p>
+                </div>
             </div>
 
             <div style="margin-top:30px;padding:20px;background:#fff;border:1px solid #ddd;border-radius:6px;display:flex;justify-content:flex-end;">
