@@ -47,6 +47,13 @@
         background-color var(--wafb-transition);
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .wafb-floating-btn, .wafb-bubble, .wafb-label, .wafb-tooltip {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
 /* ── Positions ─────────────────────────────────────── */
 .wafb-floating-btn.wafb--right { right: 24px; }
 .wafb-floating-btn.wafb--left  { left:  24px; }
@@ -211,7 +218,8 @@
     position:     fixed;
     bottom:       104px;
     z-index:      9998;
-    width:        300px;
+    width:        90vw;
+    max-width:    300px;
 
     background:   #fff;
     border-radius: 16px;
@@ -222,14 +230,15 @@
     /* Hidden state */
     opacity:          0;
     transform:        translateY(20px) scale(0.92);
+    transform-origin: var(--wafb-bubble-origin, bottom right);
     pointer-events:   none;
     transition:
         opacity   0.35s ease,
         transform 0.4s  cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.wafb-bubble.wafb-bubble--right { right: 24px; }
-.wafb-bubble.wafb-bubble--left  { left:  24px; }
+.wafb-bubble.wafb-bubble--right { right: 24px; --wafb-bubble-origin: bottom right; }
+.wafb-bubble.wafb-bubble--left  { left:  24px; --wafb-bubble-origin: bottom left; }
 
 /* Visible state (toggled by JS) */
 .wafb-bubble.is-visible {

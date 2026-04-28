@@ -14,6 +14,11 @@
     // ── Click Tracking ──────────────────────────────────────────────────────
     if (data.trackingOn && mainBtn && data.ajaxUrl) {
         mainBtn.addEventListener('click', function () {
+            // Dismiss bubble if it's open
+            if (bubble && typeof dismissBubble === 'function' && bubble.classList.contains('is-visible')) {
+                dismissBubble();
+            }
+
             var fd = new FormData();
             fd.append('action', 'wafb_track_click');
             fd.append('nonce',  data.nonce || '');
