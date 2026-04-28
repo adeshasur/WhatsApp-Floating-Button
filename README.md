@@ -1,95 +1,47 @@
-# WhatsApp Floating Button – WordPress Plugin
+# WhatsApp Floating Button
 
-> **v2.0** — Advanced floating WhatsApp button with chat bubble, business hours, custom colours, pre-filled messages, click analytics, and page visibility rules.
+An advanced, professional floating WhatsApp button plugin for WordPress. Elevate your website's customer interaction with a premium, modern chat interface.
 
 ## ✨ Features
 
-| Feature | Description |
-|---|---|
-| 💬 **Pre-filled Message** | Auto-types a custom message when the user opens WhatsApp |
-| 🗨️ **Chat Bubble Popup** | Timed popup with agent name, avatar, and a custom greeting |
-| 🎨 **Custom Colour + Size** | Native colour picker + Small / Medium / Large button |
-| 🏷️ **Pill Label** | Button expands on hover to reveal a text label |
-| ⏰ **Business Hours** | Hides the button outside your configured hours & timezone |
-| 👁️ **Page Visibility Rules** | Show or hide the button on specific pages |
-| 📊 **Click Analytics** | Counts every click directly in the WordPress dashboard |
-| 🎬 **Animation Styles** | Pulse Ring, Bounce, Shake, or None |
-| 🔒 **Secure** | WordPress Settings API with full sanitisation & nonce-protected AJAX |
-| ⚡ **Zero bloat** | CSS/JS only loaded when a phone number is saved |
+- **Premium UI/UX:** Stunning glassmorphism design with backdrop blur.
+- **Interactive Chat Bubble:** Automated popup with a realistic typing indicator.
+- **Next-Gen Animations:** Gentle bobbing (floating) animation and blinking "Online" status dot.
+- **Fully Customizable:** Change colors, position, sizes, and labels directly from the admin dashboard.
+- **Live Admin Preview:** See your changes in real-time as you configure them.
+- **Analytics:** Track how many times your button is clicked.
+- **Business Hours:** Show/hide the button based on your availability.
+- **Page Visibility:** Control which pages the button appears on.
+- **Translation Ready:** Full i18n support.
 
-## 📸 Settings Page Tabs
+## 🚀 Live Demo
 
-- **⚙️ General** — Phone number, pre-filled message, tooltip, position, mobile toggle
-- **🎨 Appearance** — Colour, size, label text, animation
-- **💬 Chat Bubble** — Enable, agent name + avatar, message, delay
-- **👁️ Visibility** — All pages / include / exclude + Business hours
-- **📊 Analytics** — Live click counter with reset option
+Check out the interactive demo here:
+**[Live Demo on GitHub Pages](https://adeshasur.github.io/WhatsApp-Floating-Button/)**
 
-## 🚀 Installation
+*(Note: To see this link work, please enable GitHub Pages in your repository settings and select the 'main' branch.)*
 
-1. Download or clone this repository.
-2. Copy the `WhatsApp-Floating-Button` folder into your WordPress `wp-content/plugins/` directory.
-3. Go to **WordPress Admin → Plugins** and activate **WhatsApp Floating Button**.
-4. Navigate to **Settings → WhatsApp Button** and enter your phone number.
+## 🛠️ Installation
 
-## ⚙️ Configuration
+1. Download the repository as a ZIP file.
+2. In your WordPress Admin, go to **Plugins > Add New > Upload Plugin**.
+3. Upload the ZIP file and click **Install Now**.
+4. **Activate** the plugin.
+5. Go to **Settings > WhatsApp Button** to configure your phone number and styles.
 
-### General
-- **WhatsApp Phone Number** — Include full country code, e.g. `+94771234567`
-- **Pre-filled Message** — Automatically typed in the chat (optional)
-- **Tooltip Text** — Hover label shown above the button
+## 🖥️ Shortcode
 
-### Appearance
-- **Button Colour** — Choose any colour with the native colour picker
-- **Button Size** — Small (48 px) / Medium (60 px) / Large (72 px)
-- **Label Text** — Expands the button into a pill shape on hover
-- **Animation** — Pulse Ring / Bounce / Shake / None
+You can also display the button manually anywhere using:
+`[whatsapp_button]`
 
-### Chat Bubble
-- **Enable** — Toggle on/off
-- **Agent Name & Avatar** — Personalise the popup header
-- **Bubble Message** — Greeting text (supports emojis & line breaks)
-- **Show After** — Delay in seconds before the bubble appears
+## 🔒 Security
 
-### Visibility
-- **Page Rules** — Show on all pages, include specific pages, or exclude specific pages
-- **Business Hours** — Set active days, time range, and timezone
-
-### Analytics
-- **Click Tracking** — Toggle on/off
-- **Total Clicks** — Live counter in the dashboard
-- **Reset Counter** — Check the reset box and save to clear the count
-
-## 📁 File Structure
-
-```
-WhatsApp-Floating-Button/
-├── whatsapp-button.php       ← Main plugin file
-├── css/
-│   └── whatsapp-button.css   ← Frontend styles
-├── js/
-│   └── whatsapp-button.js    ← Chat bubble & click tracking
-└── README.md
-```
-
-## 📋 Changelog
-
-### v2.0.0
-- Added pre-filled message support
-- Added chat bubble popup with avatar, agent name, and delay
-- Added custom button colour (colour picker)
-- Added Small / Medium / Large size options
-- Added pill label expand-on-hover
-- Added animation styles: Pulse Ring / Bounce / Shake / None
-- Added page visibility rules (all / include / exclude)
-- Added business hours gating (day, time range, timezone)
-- Added click analytics with reset option
-- Added tabbed admin settings page
-- Added AJAX-based secure click tracking
-
-### v1.0.0
-- Initial release — basic floating button with settings page
+This plugin follows WordPress security best practices, including:
+- Input sanitization.
+- Output escaping.
+- Nonce verification for AJAX actions.
+- Capability checks for admin actions.
 
 ## 📄 License
 
-[GPL v2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
+GPL v2 or later.
