@@ -45,7 +45,7 @@ function wafb_defaults() {
         'button_position'   => 'right',
         'show_on_mobile'    => '1',
         // Appearance
-        'button_color'      => '#36ba31',
+        'button_color'      => '#00A884',
         'button_size'       => 'medium',
         'button_label'      => '',
         'animation_style'   => 'pulse',
