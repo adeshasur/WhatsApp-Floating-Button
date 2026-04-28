@@ -4,8 +4,8 @@
 
 /* ── CSS Custom Properties ────────────────────────── */
 :root {
-    --wafb-color:          #128C7E;
-    --wafb-rgb:            18, 140, 126;
+    --wafb-color:          #1EBEA5;
+    --wafb-rgb:            30, 190, 165;
     --wafb-shadow:         0 8px 24px rgba(0, 0, 0, 0.12);
     --wafb-shadow-hover:   0 12px 32px rgba(0, 0, 0, 0.18);
     --wafb-transition:     0.25s cubic-bezier(0.4, 0, 0.2, 1);
