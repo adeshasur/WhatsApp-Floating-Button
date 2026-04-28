@@ -204,6 +204,16 @@ function wafb_render_settings_page() {
 
         <p style="color:#666;margin-bottom:20px;"><?php _e( 'Configure your floating WhatsApp button from one place.', 'whatsapp-floating-button' ); ?></p>
 
+        <div id="wafb-admin-preview-sticky" style="position:fixed; top:150px; right:40px; width:300px; z-index:100; display:none;">
+            <div style="background:#fff; border:1px solid #e5e5e5; border-radius:12px; padding:20px; box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+                <h3 style="margin-top:0; font-size:14px; border-bottom:1px solid #eee; padding-bottom:10px;"><?php _e( 'Live Preview', 'whatsapp-floating-button' ); ?></h3>
+                <div id="wafb-live-preview-container" style="height:150px; display:flex; align-items:center; justify-content:center; background:#f9f9f9; border-radius:8px; position:relative; overflow:hidden;">
+                    <!-- Live preview content will be injected by JS -->
+                </div>
+                <p style="font-size:11px; color:#888; margin-top:10px; text-align:center;"><?php _e( 'Note: Some animations only show on frontend.', 'whatsapp-floating-button' ); ?></p>
+            </div>
+        </div>
+
         <?php settings_errors( 'wafb_messages' ); ?>
 
         <!-- TAB NAV -->
@@ -416,8 +426,13 @@ function wafb_render_settings_page() {
                 <h3 style="margin-bottom:8px;"><?php _e( 'Live Preview', 'whatsapp-floating-button' ); ?></h3>
                 <div style="position:relative;width:320px;margin:0 auto;">
                     <div class="wafb-bubble-preview" style="
-                        width:300px;background:#fff;border-radius:16px;
-                        box-shadow:0 8px 32px rgba(0,0,0,.15);overflow:hidden;
+                        width:300px;    background:   rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border:       1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow:   0 12px 40px rgba(0, 0, 0, 0.12);
+overflow:hidden;
                         font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
                         <div style="background:<?php echo $preview_color; ?>;padding:14px 18px;display:flex;align-items:center;gap:12px;">
                             <div style="width:42px;height:42px;border-radius:50%;overflow:hidden;
@@ -658,6 +673,43 @@ function wafb_render_settings_page() {
                 hoursOpts.style.display = this.checked ? 'block' : 'none';
             });
         }
+        // ── Live Preview logic ──────────────────────────────────────────────
+        var liveContainer = document.getElementById('wafb-live-preview-container');
+        var stickyPreview = document.getElementById('wafb-admin-preview-sticky');
+        
+        function updateLivePreview() {
+            var color = document.getElementById('wafb_color').value;
+            var label = document.getElementById('wafb_label').value;
+            var size  = document.querySelector('input[name="wafb_settings[button_size]"]:checked').value;
+            
+            var px = (size === 'small') ? 40 : (size === 'medium' ? 50 : 60);
+            var svgSize = (size === 'small') ? 18 : (size === 'medium' ? 22 : 28);
+            
+            var html = '<div style="display:flex; align-items:center; background:' + color + '; padding:10px ' + (label ? '15px' : '10px') + '; border-radius:50px; color:#fff; box-shadow:0 5px 15px rgba(0,0,0,0.1); cursor:default;">';
+            html += '<svg viewBox="0 0 448 512" width="' + svgSize + '" height="' + svgSize + '" fill="#fff"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.5-9.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>';
+            if (label) html += '<span style="margin-left:10px; font-weight:700; font-size:14px;">' + label + '</span>';
+            html += '</div>';
+            
+            if (liveContainer) liveContainer.innerHTML = html;
+        }
+        
+        // Show sticky preview when on Appearance tab
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                if (stickyPreview) stickyPreview.style.display = (tab.dataset.tab === 'tab-appearance') ? 'block' : 'none';
+            });
+        });
+        
+        // Listeners for live updates
+        ['wafb_color', 'wafb_label'].forEach(function(id){
+            var el = document.getElementById(id);
+            if(el) el.addEventListener('input', updateLivePreview);
+        });
+        document.querySelectorAll('input[name="wafb_settings[button_size]"]').forEach(function(r){
+            r.addEventListener('change', updateLivePreview);
+        });
+        
+        updateLivePreview(); // Init
     })();
     </script>
     <?php
