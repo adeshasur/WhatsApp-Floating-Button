@@ -164,6 +164,24 @@ function wafb_render_settings_page() {
     $s = wafb_get_settings();
     ?>
     <div class="wrap" id="wafb-wrap">
+    <style>
+        #wafb-wrap { max-width: 1000px; margin-top: 20px; }
+        #wafb-tabs-nav { background: #fff; padding: 10px 10px 0; border-radius: 8px 8px 0 0; border: 1px solid #e5e5e5; border-bottom: none; }
+        #wafb-tabs-nav .nav-tab { 
+            border: none; background: transparent; margin: 0 5px 0 0; padding: 10px 18px; 
+            font-weight: 600; font-size: 14px; color: #666; border-radius: 6px 6px 0 0;
+            transition: all 0.2s;
+        }
+        #wafb-tabs-nav .nav-tab-active { background: #f0f0f1; color: #2271b1; box-shadow: inset 0 -3px 0 #2271b1; }
+        #wafb-tabs-nav .nav-tab:hover:not(.nav-tab-active) { background: #f6f7f7; color: #1d2327; }
+        
+        .wafb-tab-content { 
+            background: #fff; padding: 25px 30px; border: 1px solid #e5e5e5; 
+            border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .form-table th { font-weight: 600; color: #1d2327; width: 220px; }
+        .form-table td { padding: 15px 10px; }
+    </style>
 
         <h1 style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
             <span style="display:inline-flex;align-items:center;justify-content:center;
@@ -175,6 +193,15 @@ function wafb_render_settings_page() {
             <?php _e( 'WhatsApp Floating Button', 'whatsapp-floating-button' ); ?>
             <span style="font-size:12px;font-weight:400;color:#999;align-self:flex-end;margin-bottom:4px;">v<?php echo esc_html( WAFB_VERSION ); ?></span>
         </h1>
+        
+        <div style="background:#fff; border:1px solid #e5e5e5; border-radius:8px; padding:15px 20px; margin-bottom:25px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+            <div>
+                <p style="margin:0; font-weight:600; color:#333;"><?php _e( 'Want to show the button via Shortcode?', 'whatsapp-floating-button' ); ?></p>
+                <p style="margin:0; font-size:13px; color:#666;"><?php _e( 'Paste this anywhere on your pages or posts.', 'whatsapp-floating-button' ); ?></p>
+            </div>
+            <code style="background:#f0f0f1; padding:8px 15px; border-radius:5px; font-size:14px; border:1px solid #dcdcde; cursor:pointer;" onclick="navigator.clipboard.writeText('[whatsapp_button]') && alert('Shortcode copied!')" title="<?php esc_attr_e( 'Click to copy', 'whatsapp-floating-button' ); ?>">[whatsapp_button]</code>
+        </div>
+
         <p style="color:#666;margin-bottom:20px;"><?php _e( 'Configure your floating WhatsApp button from one place.', 'whatsapp-floating-button' ); ?></p>
 
         <?php settings_errors( 'wafb_messages' ); ?>
@@ -800,7 +827,10 @@ function wafb_render_button() {
             </div>
         </div>
         <div class="wafb-bubble__body">
-            <div class="wafb-bubble__msg"><?php echo wp_kses_post( $bubble_text ); ?></div>
+            <div class="wafb-bubble__typing" id="wafb-typing">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="wafb-bubble__msg" id="wafb-msg" style="display:none;"><?php echo wp_kses_post( $bubble_text ); ?></div>
         </div>
         <a href="<?php echo esc_url( $url ); ?>"
            class="wafb-bubble__cta"

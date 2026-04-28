@@ -319,13 +319,37 @@
 .wafb-bubble__msg {
     background:    #fff;
     border-radius: 0 12px 12px 12px;
-    padding:       10px 14px;
-    font-size:     13px;
+    padding:       12px 16px;
+    font-size:     14px;
     line-height:   1.55;
     color:         #333;
     box-shadow:    0 1px 3px rgba(0, 0, 0, 0.08);
     position:      relative;
-    animation:     wafb-msg-in 0.4s 0.3s ease both;
+}
+
+/* ── Typing Indicator ──────────────────────────────── */
+.wafb-bubble__typing {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #fff;
+    width: fit-content;
+    padding: 12px 16px;
+    border-radius: 0 12px 12px 12px;
+}
+.wafb-bubble__typing span {
+    width: 6px;
+    height: 6px;
+    background: #999;
+    border-radius: 50%;
+    animation: wafb-typing 1.4s infinite ease-in-out both;
+}
+.wafb-bubble__typing span:nth-child(1) { animation-delay: -0.32s; }
+.wafb-bubble__typing span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes wafb-typing {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
 }
 .wafb-bubble__msg::before {
     content:          '';

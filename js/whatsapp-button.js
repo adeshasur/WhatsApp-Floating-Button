@@ -48,6 +48,16 @@
             // Show after delay.
             var showTimer = setTimeout(function () {
                 bubble.classList.add('is-visible');
+
+                // Typing indicator premium effect
+                var typing = document.getElementById('wafb-typing');
+                var msg    = document.getElementById('wafb-msg');
+                if (typing && msg) {
+                    setTimeout(function() {
+                        typing.style.display = 'none';
+                        msg.style.display    = 'block';
+                    }, 1500); // Show typing for 1.5s
+                }
             }, delayMs);
 
             // Close button.
