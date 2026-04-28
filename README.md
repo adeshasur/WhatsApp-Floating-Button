@@ -1,47 +1,43 @@
 # WhatsApp Floating Button
 
-An advanced, professional floating WhatsApp button plugin for WordPress. Elevate your website's customer interaction with a premium, modern chat interface.
+A professional, high-performance floating WhatsApp button plugin for WordPress. Designed for modern websites that prioritize user experience and premium aesthetics.
 
-## ✨ Features
+## Features
 
-- **Premium UI/UX:** Stunning glassmorphism design with backdrop blur.
-- **Interactive Chat Bubble:** Automated popup with a realistic typing indicator.
-- **Next-Gen Animations:** Gentle bobbing (floating) animation and blinking "Online" status dot.
-- **Fully Customizable:** Change colors, position, sizes, and labels directly from the admin dashboard.
-- **Live Admin Preview:** See your changes in real-time as you configure them.
-- **Analytics:** Track how many times your button is clicked.
-- **Business Hours:** Show/hide the button based on your availability.
-- **Page Visibility:** Control which pages the button appears on.
-- **Translation Ready:** Full i18n support.
+### Premium UI/UX
+- **Glassmorphism Design:** Implements modern "glass" effects with backdrop blur for a sophisticated look.
+- **Interactive Chat Bubble:** Automated popup with a realistic typing indicator to engage visitors.
+- **Advanced Animations:** Gentle floating animations and a blinking "Online" status indicator.
 
-## 🚀 Live Demo
+### Full Customization
+- **Admin Dashboard:** Control colors, positions, sizes, and labels directly from the WordPress settings.
+- **Live Preview:** View configuration changes in real-time within the admin area.
+- **Business Hours:** Schedule button visibility based on operational hours.
+- **Analytics:** Built-in click tracking to monitor user engagement.
 
-Check out the interactive demo here:
-**[Live Demo on GitHub Pages](https://adeshasur.github.io/WhatsApp-Floating-Button/)**
+### Technical Excellence
+- **Security:** Strict input sanitization and output escaping following WordPress best practices.
+- **Responsive:** Fully optimized for mobile, tablet, and desktop devices.
+- **Accessibility:** Supports system-level motion preferences and follows semantic standards.
+- **Shortcode Support:** Easily place the button anywhere using `[whatsapp_button]`.
 
-*(Note: To see this link work, please enable GitHub Pages in your repository settings and select the 'main' branch.)*
+## Live Demonstration
 
-## 🛠️ Installation
+A live preview of the interface is available on GitHub Pages:
+[View Live Demo](https://adeshasur.github.io/WhatsApp-Floating-Button/)
+
+## Installation
 
 1. Download the repository as a ZIP file.
-2. In your WordPress Admin, go to **Plugins > Add New > Upload Plugin**.
-3. Upload the ZIP file and click **Install Now**.
+2. In your WordPress Dashboard, navigate to **Plugins > Add New > Upload Plugin**.
+3. Select the ZIP file and click **Install Now**.
 4. **Activate** the plugin.
-5. Go to **Settings > WhatsApp Button** to configure your phone number and styles.
+5. Go to **Settings > WhatsApp Button** to configure your preferences.
 
-## 🖥️ Shortcode
+## Developer
 
-You can also display the button manually anywhere using:
-`[whatsapp_button]`
+Developed by **Adheesha Sooriyaarachchi**.
 
-## 🔒 Security
+## License
 
-This plugin follows WordPress security best practices, including:
-- Input sanitization.
-- Output escaping.
-- Nonce verification for AJAX actions.
-- Capability checks for admin actions.
-
-## 📄 License
-
-GPL v2 or later.
+Distributed under the GNU General Public License v2 or later. See the LICENSE file for more details.
