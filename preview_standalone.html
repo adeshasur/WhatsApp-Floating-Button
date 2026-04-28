@@ -28,6 +28,10 @@
             text-decoration:     none;
             overflow:            hidden;
             cursor:              pointer;
+            padding:             0;
+            border:              none;
+            line-height:         0;
+            outline:             none;
             box-shadow:          var(--wafb-shadow);
             transition: transform var(--wafb-transition), box-shadow var(--wafb-transition), max-width 0.35s ease, padding 0.35s ease;
         }
@@ -48,7 +52,12 @@
             pointer-events: none;
             color: #fff;
         }
-        .wafb-floating-btn.wafb--has-label svg { margin-left: 16px; }
+        .wafb-floating-btn svg { 
+            display: block; 
+            margin-left: 1px; /* Optical centering nudge */
+            margin-top: -1px; 
+        }
+        .wafb-floating-btn.wafb--has-label svg { margin-left: 16px; margin-top: 0; }
         .wafb-floating-btn.wafb--has-label:hover { padding-right: 18px; }
         .wafb-floating-btn.wafb--has-label:hover .wafb-label { max-width: 220px; opacity: 1; margin-left: 8px; }
 
